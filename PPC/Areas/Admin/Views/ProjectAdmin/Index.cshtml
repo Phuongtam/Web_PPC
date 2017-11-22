@@ -11,13 +11,14 @@
 </p>
 <div class="card mb-3">
     <div class="card-header">
-        <i class="fa fa-table"></i> Data Table Example
+        <i class="fa fa-table"></i> List of Project
     </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>
                             @Html.DisplayNameFor(model => model.PropertyName)
                         </th>
@@ -81,13 +82,22 @@
                         @*<th>
                             @Html.DisplayNameFor(model => model.WARD.WardName)
                         </th>*@
-                        <th></th>
+                      
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
                         <tr>
+                            <td style="margin-top:-5px">
+                               
+                               <a href="~/Admin/ProjectAdmin/Edit/@item.ID" title="Edit"><img src="~/Images/edit.png" width="20px" /></a><br />
+                                <a href="~/Admin/ProjectAdmin/Detals/@item.ID" title="Details"><img src="~/Images/if_More_2001881.png" width="20px" /></a><br />
+                                <a href="~/Admin/ProjectAdmin/Delete/@item.ID" title="Delete"><img src="~/Images/if_delete_16_22536.png" width="20px" /></a>
+                                @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+                            </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.PropertyName)
                                 </td>
@@ -155,11 +165,7 @@
                                 @*<td>
                                     @Html.DisplayFor(modelItem => item.WARD.WardName)
                                 </td>*@
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                                </td>
+                               
                             </tr>
                             }
                 </tbody>
