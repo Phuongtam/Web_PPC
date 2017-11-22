@@ -7,7 +7,7 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "ProjectAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -28,8 +28,13 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Avatar, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
+                @*@Html.EditorFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })*@
+                <img src="~/Images/@Model.Avatar" width="100px" />
+                @using (Html.BeginForm("Edit", "ProjectAdmin", System.Web.Mvc.FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <input class="form-control" type="file" name="AvatarUpload" accept="image/*" />
+                }
             </div>
         </div>
 
