@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/css/css-seach.css" rel="stylesheet" />
+</head>
+<body>
+    <!--Menubar-->
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="~/Home/Index" style="margin-top:-15px;margin-bottom:-10px;margin-left:80px">
+                    <img src="~/Images/logo.png" style="height:60px" />
+                </a>
+
+            </div>
+            <div class="navbar-collapse collapse" >
+                <ul class="nav navbar-nav" style="margin-top:15px">
+                    <li class="active">@Html.ActionLink("Home", "Index", "Home")<span class="sr-only">(current)</span></li>
+                    <li class="active">@Html.ActionLink("About", "About", "Home")</li>
+                    <li class="active">@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" style="margin-top:15px;margin-right:75px">
+                    <li><a href="/Account/Register" id="registerLink">Register</a></li>
+                    <li><a href="/Account/Login" id="loginLink">Log in</a></li>
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+    @*
+    <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="~/Home/Index" style="margin-top:-10px;margin-bottom:-10px;margin-left:80px">
+                <img src="~/Images/PPCRentalLogo.png" style="height:80px"/></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="~/Home/Index">Home <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Link</a></li>
+                @*<li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+    
+    @Html.Partial("_LoginPartial")
+    </ul>
+    <div class="col-lg-4 col-md-4 col-xs-4 pull-right" style="position: absolute; right: 80px;bottom: 50px; text-align: right;">
+        <a style="padding: -10px;margin-left: 5px;" href="#">
+            <img src="https://perfectpropertyvn.com/images/icon/29.png" style="width: 6%" id="img_icon">
+            <span class="photro"> <b>Online Support</b></span>
+        </a>
+        <a style="padding: -10px;margin-left: 5px " href="#">
+            <img src="https://perfectpropertyvn.com/images/icon/30.png" style="width: 6%" id="img_icon">
+            <span class="photro"> <b>0126 759 8195</b></span>
+        </a>
+
+    </div>
+    </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+    </nav>
+    *@
+   
+    
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - K21T3 - Team6</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
