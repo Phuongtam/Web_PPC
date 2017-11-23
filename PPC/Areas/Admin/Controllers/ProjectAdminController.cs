@@ -32,19 +32,37 @@ namespace PPC.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(int id, PROPERTY p)
         {
-            ViewBag.property_type = db.PROPERTY_TYPE.OrderByDescending(x => x.ID).ToList();
-            ViewBag.district = db.DISTRICT.OrderByDescending(x => x.ID).Where(y => y.ID >= 31 && y.ID <= 54).ToList();
-            ViewBag.ward = db.WARD.OrderByDescending(x => x.ID).Where(y => y.District_ID >= 31 && y.District_ID <= 54).ToList();
-            ViewBag.street = db.STREET.OrderByDescending(x => x.ID).Where(y => y.District_ID >= 31 && y.District_ID <= 54).ToList();
-            ViewBag.status = db.PROJECT_STATUS.OrderByDescending(x => x.ID).ToList();
+            //ViewBag.property_type = db.PROPERTY_TYPE.OrderByDescending(x => x.ID).ToList();
+            //ViewBag.district = db.DISTRICT.OrderByDescending(x => x.ID).Where(y => y.ID >= 31 && y.ID <= 54).ToList();
+            //ViewBag.ward = db.WARD.OrderByDescending(x => x.ID).Where(y => y.District_ID >= 31 && y.District_ID <= 54).ToList();
+            //ViewBag.street = db.STREET.OrderByDescending(x => x.ID).Where(y => y.District_ID >= 31 && y.District_ID <= 54).ToList();
+            //ViewBag.status = db.PROJECT_STATUS.OrderByDescending(x => x.ID).ToList();
 
             var product = db.PROPERTY.FirstOrDefault(x => x.ID == id);
 
-            string imgs = Images(p);
+           // string imgs = Images(p);
             string filename;
             string extension;
             string s;
-
+            string str = product.Avatar;
+            product.PropertyName = p.PropertyName;
+            product.Price = p.Price;
+       
+            product.UnitPrice = p.UnitPrice;
+            product.BathRoom = p.BathRoom;
+            product.BedRoom = p.BedRoom;
+            product.PackingPlace = p.PackingPlace;
+            //product.USER = p.USER;
+            product.Sale_ID = p.Sale_ID;
+            product.Street_ID = p.Street_ID;
+            product.Ward_ID = p.Ward_ID;
+            product.District_ID = p.District_ID;
+            product.Status_ID = p.Status_ID;
+            product.PropertyType_ID = p.PropertyType_ID;
+            product.Create_post = p.Create_post;
+            product.Created_at = p.Created_at;
+            product.Updated_at = DateTime.Now;
+           
             if (p.AvatarUpload != null)
             {
                 filename = Path.GetFileNameWithoutExtension(p.AvatarUpload.FileName);
@@ -54,32 +72,17 @@ namespace PPC.Areas.Admin.Controllers
                 s = p.Avatar;
                 filename = Path.Combine(Server.MapPath("~/Images"), filename);
                 p.AvatarUpload.SaveAs(filename);
-
+                product.Avatar = p.Avatar;
             }
             else
             {
-                s = product.Avatar;
+                product.Avatar =str;
 
             }
 
 
-            
-            product.PropertyName = p.PropertyName;
-            product.Price = p.Price;
-            product.Avatar = p.Avatar;
-            product.UnitPrice = p.UnitPrice;
-            product.BathRoom = p.BathRoom;
-            product.BedRoom = p.BedRoom;
-            product.PackingPlace = p.PackingPlace;
-            //product.USER = p.USER;
-            product.Sale_ID = p.Sale_ID;
-            product.DISTRICT = p.DISTRICT;
-            product.PROJECT_STATUS = p.PROJECT_STATUS;
-            product.PROPERTY_TYPE = p.PROPERTY_TYPE;
-            product.Create_post = p.Create_post;
-            product.Created_at = p.Created_at;
-            product.Updated_at = DateTime.Now;
             db.SaveChanges();
+
             return RedirectToAction("Index");
             
         }
@@ -92,6 +95,7 @@ namespace PPC.Areas.Admin.Controllers
             string filename;
             string extension;
             string str = "";
+           // string avatar_old=p.Images;
             if (p.ImagesUpload != null)
             {
                 foreach (var file in p.ImagesUpload)

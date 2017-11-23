@@ -74,7 +74,7 @@
                             @Html.DisplayNameFor(model => model.STREET.StreetName)
                         </th>*@
                         <th>
-                            @Html.DisplayNameFor(model => model.USER.Email)
+                            @Html.DisplayNameFor(model => model.USER.FullName)
                         </th>
                         @*<th>
                             @Html.DisplayNameFor(model => model.USER1.Email)
@@ -89,7 +89,7 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td style="margin-top:-5px">
+                            <td>
                                
                                <a href="~/Admin/ProjectAdmin/Edit/@item.ID" title="Edit"><img src="~/Images/edit.png" width="20px" /></a><br />
                                 <a href="~/Admin/ProjectAdmin/Detals/@item.ID" title="Details"><img src="~/Images/if_More_2001881.png" width="20px" /></a><br />
@@ -144,20 +144,23 @@
                                     @Html.DisplayFor(modelItem => item.Updated_at)
                                 </td>*@
                                 <td>
+                                    @*<p>@item.DISTRICT.DistrictName</p>*@
                                     @Html.DisplayFor(modelItem => item.DISTRICT.DistrictName)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.PROJECT_STATUS.Status_Name)
+                                    @*<p>@item.PROJECT_STATUS.Status_Name</p>*@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.PROPERTY_TYPE.CodeType)
+                                    @*<p>@item.PROPERTY_TYPE.CodeType</p>*@
                                 </td>
                                 @*<td>
                                     @Html.DisplayFor(modelItem => item.STREET.StreetName)
                                 </td>*@
                                 <td>
-                                    <p>@item.USER.Email.Substring(0,14)</p>
-                                    @*@Html.DisplayFor(modelItem => item.USER.Email)*@
+                                    
+                                    @Html.DisplayFor(modelItem => item.USER.FullName)
                                 </td>
                                 @*<td>
                                     @Html.DisplayFor(modelItem => item.USER1.Email)
