@@ -30,7 +30,7 @@
             <div class="col-md-10">
                 @*@Html.EditorFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })*@
-                <img src="~/Images/@Model.Avatar" width="100px" />
+                <img src="~/Images/@Model.Avatar" width="150px" />
                
             </div>
             @using (Html.BeginForm("Edit", "ProjectAdmin", System.Web.Mvc.FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -39,16 +39,16 @@
             }
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Images, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Images, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PropertyType_ID, "PropertyType_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PropertyType_ID, "PropertyType", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("PropertyType_ID", new SelectList(ViewBag.property_type,"ID","CodeType",Model.PROPERTY_TYPE), htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PropertyType_ID, "", new { @class = "text-danger" })
@@ -64,7 +64,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Street_ID, "Street_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Street_ID, "Street", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("Street_ID", new SelectList(ViewBag.street, "ID", "StreetName", Model.STREET), htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Street_ID, "", new { @class = "text-danger" })
@@ -80,7 +80,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.District_ID, "District_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.District_ID, "District", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("District_ID", new SelectList(ViewBag.district, "ID", "DistrictName", Model.DISTRICT), htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.District_ID, "", new { @class = "text-danger" })
@@ -143,13 +143,13 @@
             </div>
         </div>*@
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Created_at, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Created_at, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Created_at, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         @*<div class="form-group">
             @Html.LabelFor(model => model.Create_post, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -183,13 +183,13 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Sale_ID, "Sale", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("Sale_ID", new SelectList(ViewBag.sale, "ID", "FullName", Model.USER), htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Sale_ID, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
