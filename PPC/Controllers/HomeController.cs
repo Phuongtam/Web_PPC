@@ -15,6 +15,10 @@ namespace PPC.Controllers
         {
             // commnet
             var model = db.PROPERTY.ToList();
+            //ViewBag.property_type = db.PROPERTY_TYPE.OrderByDescending(x => x.ID == id).ToList();
+            //ViewBag.district = db.DISTRICT.OrderByDescending(x => x.ID == id).ToList();
+            //ViewBag.ward = db.WARD.OrderByDescending(x => x.ID == id).ToList();
+            //ViewBag.street = db.STREET.OrderByDescending(x => x.ID == id).ToList();
             ListAll();
             return View(model);
          
@@ -23,26 +27,28 @@ namespace PPC.Controllers
         //
         public void ListAll()
         {
-            type = new List<SelectListItem>();
-            district = new List<SelectListItem>();
-            var typee = db.PROPERTY_TYPE.ToList().OrderBy(x => x.CodeType);
-            var distric1 = db.DISTRICT.ToList().OrderBy(x => x.DistrictName);
-            //
-            type.Add(new SelectListItem { Text="All",Value="all" });
-            foreach (var item  in typee)
-            {
-                type.Add(new SelectListItem { Text = item.CodeType, Value = item.CodeType });
+            
+          
+            //type = new List<SelectListItem>();
+            //district = new List<SelectListItem>();
+            //var typee = db.PROPERTY_TYPE.ToList().OrderBy(x => x.CodeType);
+            //var distric1 = db.DISTRICT.ToList().OrderBy(x => x.DistrictName);
+            ////
+            //type.Add(new SelectListItem { Text="All",Value="all" });
+            //foreach (var item  in typee)
+            //{
+            //    type.Add(new SelectListItem { Text = item.CodeType, Value = item.CodeType });
 
-            }
-            ViewData["loai"] = type;
-            //
-            district.Add(new SelectListItem { Text = "All", Value = "all" });
-            foreach (var item in distric1)
-            {
-                district.Add(new SelectListItem { Text = item.DistrictName, Value = item.DistrictName });
+            //}
+            //ViewData["loai"] = type;
+            ////
+            //district.Add(new SelectListItem { Text = "All", Value = "all" });
+            //foreach (var item in distric1)
+            //{
+            //    district.Add(new SelectListItem { Text = item.DistrictName, Value = item.DistrictName });
 
-            }
-            ViewData["quan"] = district;
+            //}
+            //ViewData["quan"] = district;
         }
         [HttpGet]
         public ActionResult Search(string text)

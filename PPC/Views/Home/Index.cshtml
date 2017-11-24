@@ -64,7 +64,14 @@
                         <div class="tkqs-price-min">
                             <label for="bqf-price-min" class="bqf-price-min-label">Property Type</label>
 
-                            @Html.DropDownList("loai", (IEnumerable<SelectListItem>)ViewData["loai"])
+                            @*@Html.DropDownList("loai", (IEnumerable<SelectListItem>)ViewData["loai"])*@
+                            <div class="form-group">
+                                @*@Html.LabelFor(model => model.PropertyType_ID, "PropertyType", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("PropertyType_ID", new SelectList(ViewBag.property_type, "ID", "CodeType", Model.PROPERTY_TYPE), htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.PropertyType_ID, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
 
                             @*<input type="text" id="bqf-price-min" class="bqf-price-min-input input" name="lp">*@
                         </div><!-- .tkqs-type -->
