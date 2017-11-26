@@ -96,7 +96,8 @@
                                 <a href="~/Admin/ProjectAdmin/Delete/@item.ID" title="Delete"><img src="~/Images/if_delete_16_22536.png" width="20px" /></a>
                                 @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
                                 @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                    *@
                             </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.PropertyName)
