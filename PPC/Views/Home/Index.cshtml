@@ -23,7 +23,7 @@
                 ...
             </div>
             <img src="~/Images/PIS_4622-Edit.jpg" style="width:100%;height:600px" />
-           
+
         </div>
         <div class="item">
             <img src="~/Images/PIS_6656-Edit-stamp.jpg" style="width:100%;height:600px" />
@@ -105,24 +105,14 @@
 
                             }
                         </div><!-- .tkqs-city -->
-
-                       
-                            
-
-                            
-
                         <!--Property type-->
-                           
                         <!--dropdown district street-->
-                           
-
-                            @*<input type="text" id="bqf-price-min" class="bqf-price-min-input input" name="lp">*@
+                        @*<input type="text" id="bqf-price-min" class="bqf-price-min-input input" name="lp">*@
                         <!-- .tkqs-type -->
-
                         @*<div class="tkqs-price-max">
-                            <label for="bqf-price-max" class="bqf-price-max-label">District</label>
-                           
-                        </div>*@
+                                <label for="bqf-price-max" class="bqf-price-max-label">District</label>
+
+                            </div>*@
                         <!-- .tkqs-district -->
 
 
@@ -142,7 +132,7 @@
 
 
 <!--List project-->
- <!---->
+<!---->
 <br />
 <div class="text-center">
     <h2 class="titlewweb"><b>LIST OF PROJECTS</b></h2>
@@ -158,16 +148,16 @@
                 <img src="~/Images/@item.Avatar" alt="@item.PropertyName">
                 <div class="caption">
                     <div class="name">
-                        <b ><a href="~/Property/Detail/@item.ID">@item.PropertyName</a></b>
+                        <b><a href="~/Property/Detail/@item.ID">@item.PropertyName</a></b>
                     </div>
 
-                    <p>@item.Content.Substring(0,90) ...</p>
+                    <p>@item.Content.Substring(0, 90) ...</p>
                     <br />
                     <p>
                         <b>&nbsp;<img src="~/Images/dollar-coin-money.png" /> &nbsp;&nbsp;@item.Price&nbsp;@item.UnitPrice &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="~/Images/chart-area.png" /> &nbsp;&nbsp;@item.Area</b><br />
                         <br />
-                    </p>       
-                    <p><a href="~/Property/Detail/@item.ID" class="btn btn-primary btn-block" role="button" >Detail</a></p>
+                    </p>
+                    <p><a href="~/Property/Detail/@item.ID" class="btn btn-primary btn-block" role="button">Detail</a></p>
                 </div>
             </div>
         </div>

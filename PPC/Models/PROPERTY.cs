@@ -53,5 +53,6 @@ namespace PPC.Models
         public virtual WARD WARD { get; set; }
         public HttpPostedFileBase AvatarUpload { get; set; }
         public IEnumerable<HttpPostedFileBase> ImagesUpload { get; set; }
+
     }
 }
