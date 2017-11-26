@@ -34,37 +34,34 @@ namespace PPC.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(int id, PROPERTY p)
         {
-
-            //var product = db.PROPERTY.FirstOrDefault(x => x.ID == id);
-            PROPERTY product;
+            //PROPERTY product;
+            PROPERTY en;
             string s;
             string b;
-            AvatarU(p, out product, out s);
-            ImagesU(p, out product, out b);
+            AvatarU(p, out en, out s);
+            ImagesU(p, out en, out b);
 
-
-            product.PROPERTY_TYPE = p.PROPERTY_TYPE;
-            product.PropertyName = p.PropertyName;
-            product.Avatar = s;
-            product.Images = b;
-            product.PropertyType_ID = p.PropertyType_ID;
-            product.Content = p.Content;
-            product.Street_ID = p.Street_ID;
-            product.Ward_ID = p.Ward_ID;
-            product.District_ID = p.District_ID;
-            product.Price = p.Price;
-            product.UnitPrice = p.UnitPrice;
-            product.Area = p.Area;
-            product.BedRoom = p.BedRoom;
-            product.BathRoom = p.BathRoom;
-            product.PackingPlace = p.PackingPlace;
-            product.Updated_at = DateTime.Now;
+            en.PROPERTY_TYPE = p.PROPERTY_TYPE;
+            en.PropertyName = p.PropertyName;
+            en.Avatar = s;
+            en.Images = b;
+            en.PropertyType_ID = p.PropertyType_ID;
+            en.Content = p.Content;
+            en.Street_ID = p.Street_ID;
+            en.Ward_ID = p.Ward_ID;
+            en.District_ID = p.District_ID;
+            en.Price = p.Price;
+            en.UnitPrice = p.UnitPrice;
+            en.Area = p.Area;
+            en.BedRoom = p.BedRoom;
+            en.BathRoom = p.BathRoom;
+            en.PackingPlace = p.PackingPlace;
+            en.Updated_at = DateTime.Now;
             db.SaveChanges();
 
             return RedirectToAction("Index");
             
         }
-
 
         private void AvatarU(PROPERTY p, out PROPERTY en, out string s)
         {
@@ -109,15 +106,22 @@ namespace PPC.Areas.Admin.Controllers
 
                 foreach (var file in p.ImagesUpload)
                 {
+                    if (file.ContentLength > 0)
+                    {
+                        filename = Path.GetFileNameWithoutExtension(file.FileName);
+                        extension = Path.GetExtension(file.FileName);
+                        filename = filename + DateTime.Now.ToString("yymmssff") + extension;
+                        p.Images = filename;
+                        b = p.Images;
+                        s = string.Concat(s, b, ",");
+                        filename = Path.Combine(Server.MapPath("~/Images"), filename);
+                        file.SaveAs(filename);
+                    }
+                    else
+                    {
+                        s = en.Images;
+                    }
 
-                    filename = Path.GetFileNameWithoutExtension(file.FileName);
-                    extension = Path.GetExtension(file.FileName);
-                    filename = filename + DateTime.Now.ToString("yymmssff") + extension;
-                    p.Images = filename;
-                    b = p.Images;
-                    s = string.Concat(s, b, ",");
-                    filename = Path.Combine(Server.MapPath("~/Images"), filename);
-                    file.SaveAs(filename);
                 }
 
 
