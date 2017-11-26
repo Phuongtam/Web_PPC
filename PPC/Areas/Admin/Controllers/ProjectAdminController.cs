@@ -34,13 +34,14 @@ namespace PPC.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(int id, PROPERTY p)
         {
-            //ViewBag.property_type = db.PROPERTY_TYPE.OrderByDescending(x => x.ID).ToList();
-            //ViewBag.district = db.DISTRICT.OrderByDescending(x => x.ID).Where(y => y.ID >= 31 && y.ID <= 54).ToList();
-            //ViewBag.ward = db.WARD.OrderByDescending(x => x.ID).Where(y => y.District_ID >= 31 && y.District_ID <= 54).ToList();
-            //ViewBag.street = db.STREET.OrderByDescending(x => x.ID).Where(y => y.District_ID >= 31 && y.District_ID <= 54).ToList();
-            //ViewBag.status = db.PROJECT_STATUS.OrderByDescending(x => x.ID).ToList();
 
-            var product = db.PROPERTY.FirstOrDefault(x => x.ID == id);
+            //var product = db.PROPERTY.FirstOrDefault(x => x.ID == id);
+            PROPERTY product;
+            string s;
+            string b;
+            AvatarU(p, out product, out s);
+            ImagesU(p, out product, out b);
+
 
             product.PROPERTY_TYPE = p.PROPERTY_TYPE;
             product.PropertyName = p.PropertyName;
