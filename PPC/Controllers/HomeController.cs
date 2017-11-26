@@ -10,18 +10,26 @@ namespace PPC.Controllers
     public class HomeController : Controller
     {
         DemoPPCRentalEntities db = new DemoPPCRentalEntities();
-      List<SelectListItem> type, district;
+     // List<SelectListItem> type, district;
         public ActionResult Index()
         {
             // commnet
             var model = db.PROPERTY.ToList();
-            //ViewBag.property_type = db.PROPERTY_TYPE.OrderByDescending(x => x.ID == id).ToList();
-            //ViewBag.district = db.DISTRICT.OrderByDescending(x => x.ID == id).ToList();
-            //ViewBag.ward = db.WARD.OrderByDescending(x => x.ID == id).ToList();
-            //ViewBag.street = db.STREET.OrderByDescending(x => x.ID == id).ToList();
-            ListAll();
+            ViewBag.property_type = db.PROPERTY_TYPE.OrderByDescending(x => x.ID).ToList();
+            ViewBag.district = db.DISTRICT.OrderByDescending(x => x.ID ).ToList();
+            ViewBag.ward = db.WARD.OrderByDescending(x => x.ID).ToList();
+            ViewBag.street = db.STREET.OrderByDescending(x => x.ID).ToList();
+            
+           // ListAll();
             return View(model);
          
+        }
+        public JsonResult GetStreet(int District_id)
+        {
+            return Json(
+            db.STREET.Where(s => s.District_ID == District_id)
+            .Select(s => new { id = s.ID, text = s.StreetName }).ToList(),
+            JsonRequestBehavior.AllowGet);
         }
         //
         //

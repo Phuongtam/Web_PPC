@@ -1,8 +1,11 @@
-﻿
+﻿@using PPC.Models;
+@*@model PPC.Models.PROPERTY*@
+
 @model IEnumerable<PPC.Models.PROPERTY>
 
 @{
     ViewBag.Title = "Home Page";
+    var db = new DemoPPCRentalEntities();
 }
 
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -59,27 +62,66 @@
                         <div class="tkqs-city">
                             <label for="bqf-city-select" class="bqf-city-label">Property Name</label>
                             <input type="text" class="form-control" placeholder="Search" name="text" style="height:initial">
+                        </div>
+                        <div class="tkqs-price-min">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <div>
+                                    <label for="bqf-city-select" class="bqf-price-min-label">District</label>
+
+                                    @Html.DropDownList("Quan_ID", new SelectList(db.DISTRICT, "ID", "DistrictName"), "All Districts", new { @class = "form-control" })
+                                </div>
+                                <div>
+                                    <label for="bqf-price-min" class="bqf-price-min-label">Street</label>
+
+                                    @Html.DropDownList("Street_ID", new SelectList(db.STREET.Take(0), "ID", "StreetName"), "All Streets", new { @class = "form-control" })
+                                </div>
+
+
+
+
+                            }
+                            <!--Scripts-->
+                            @section Scripts {
+                                <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+                                @Scripts.Render("~/bundles/jqueryval")
+
+
+                                <script>
+                                    $('#Quan_ID').select2();
+                                    $('#Quan_ID').on('change', function () {
+                                        $('#Street_ID').empty();
+                                        $.getJSON('GetStreet?District_id=' + $('#Quan_ID').val(), function (json) { $('#Street_ID').select2({ data: json }); });
+                                    });
+                                </script>
+
+                            }
                         </div><!-- .tkqs-city -->
 
-                        <div class="tkqs-price-min">
-                            <label for="bqf-price-min" class="bqf-price-min-label">Property Type</label>
+                       
+                            
 
-                            @*@Html.DropDownList("loai", (IEnumerable<SelectListItem>)ViewData["loai"])*@
-                            <div class="form-group">
-                                @*@Html.LabelFor(model => model.PropertyType_ID, "PropertyType", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.DropDownList("PropertyType_ID", new SelectList(ViewBag.property_type, "ID", "CodeType", Model.PROPERTY_TYPE), htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.PropertyType_ID, "", new { @class = "text-danger" })*@
-                                </div>
-                            </div>
+                            
+
+                        <!--Property type-->
+                           
+                        <!--dropdown district street-->
+                           
 
                             @*<input type="text" id="bqf-price-min" class="bqf-price-min-input input" name="lp">*@
-                        </div><!-- .tkqs-type -->
+                        <!-- .tkqs-type -->
 
-                        <div class="tkqs-price-max">
+                        @*<div class="tkqs-price-max">
                             <label for="bqf-price-max" class="bqf-price-max-label">District</label>
-                            @Html.DropDownList("quan", (IEnumerable<SelectListItem>)ViewData["quan"])
-                        </div><!-- .tkqs-district -->
+                           
+                        </div>*@
+                        <!-- .tkqs-district -->
 
 
                         <div class="tkqs-submit bqf-form-bottom">
