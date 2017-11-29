@@ -63,7 +63,7 @@
                             <label for="bqf-city-select" class="bqf-city-label">Property Name</label>
                             <input type="text" class="form-control" placeholder="Search" name="text" style="height:initial">
                         </div>
-                        <div class="tkqs-price-min">
+                        @*<div class="tkqs-price-min">*@
                             @using (Html.BeginForm())
                             {
                                 @Html.AntiForgeryToken()
@@ -71,12 +71,12 @@
 
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                                <div>
-                                    <label for="bqf-city-select" class="bqf-price-min-label">District</label>
+                                <div class="tkqs-city">
+                                    <label for="bqf-price-min" class="bqf-price-min-label">District</label>
 
                                     @Html.DropDownList("Quan_ID", new SelectList(db.DISTRICT, "ID", "DistrictName"), "All Districts", new { @class = "form-control" })
-                                </div>
-                                <div>
+                                </div >
+                                <div class="tkqs-city">
                                     <label for="bqf-price-min" class="bqf-price-min-label">Street</label>
 
                                     @Html.DropDownList("Street_ID", new SelectList(db.STREET.Take(0), "ID", "StreetName"), "All Streets", new { @class = "form-control" })
@@ -102,20 +102,9 @@
                                         $.getJSON('GetStreet?District_id=' + $('#Quan_ID').val(), function (json) { $('#Street_ID').select2({ data: json }); });
                                     });
                                 </script>
-
+                               
                             }
-                        </div><!-- .tkqs-city -->
-                        <!--Property type-->
-                        <!--dropdown district street-->
-                        @*<input type="text" id="bqf-price-min" class="bqf-price-min-input input" name="lp">*@
-                        <!-- .tkqs-type -->
-                        @*<div class="tkqs-price-max">
-                                <label for="bqf-price-max" class="bqf-price-max-label">District</label>
-
-                            </div>*@
-                        <!-- .tkqs-district -->
-
-
+                        
                         <div class="tkqs-submit bqf-form-bottom">
                             <div class="bqf-submit">
                                 <input class="bqf-submit-button btn btn-alt" type="submit" value="Search Now">
@@ -151,7 +140,7 @@
                         <b><a href="~/Property/Detail/@item.ID">@item.PropertyName</a></b>
                     </div>
 
-                    <p>@item.Content.Substring(0, 90) ...</p>
+                    <p>@item.Content.Substring(0, 85) ...</p>
                     <br />
                     <p>
                         <b>&nbsp;<img src="~/Images/dollar-coin-money.png" /> &nbsp;&nbsp;@item.Price&nbsp;@item.UnitPrice &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="~/Images/chart-area.png" /> &nbsp;&nbsp;@item.Area</b><br />

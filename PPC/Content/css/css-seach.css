@@ -1005,7 +1005,7 @@ p.subscribe-to-comments {
 }
 
 .slider .tkqs-city {
-	width: 24%;
+	width: 15%;
 }
 
 .slider .tkqs-price-min,
@@ -1015,7 +1015,7 @@ p.subscribe-to-comments {
 
 .slider .tkqs-beds,
 .slider .tkqs-baths {
-	width: 5%;
+	width: 150px;
 }
 
 .slider div.tkqs-submit {
