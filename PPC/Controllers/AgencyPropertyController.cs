@@ -17,7 +17,7 @@ namespace PPC.Controllers
             if(Session["userID"]!=null)
             {
                 var id = (int)Session["userID"];
-                var project = db.PROPERTY.OrderByDescending(x => x.USER.ID==id).ToList();
+                var project = db.PROPERTY.OrderByDescending(x => x.UserID==id).ToList();
                 return View(project);
             }
            else
@@ -25,34 +25,83 @@ namespace PPC.Controllers
                 return View();
             } 
         }
-       
+
+
         [HttpGet]
         public ActionResult CreateNewProperty()
         {
-           
-            ViewBag.property_type = db.PROPERTY_TYPE.OrderByDescending(x => x.ID).ToList();
-            ViewBag.district = db.DISTRICT.OrderByDescending(x => x.ID).Where(y => y.ID >= 31 && y.ID <= 54).ToList();
-            ViewBag.ward = db.WARD.OrderByDescending(x => x.ID).Where(y => y.District_ID >= 31 && y.District_ID <= 54).ToList();
-            ViewBag.street = db.STREET.OrderByDescending(x => x.ID).Where(y => y.District_ID >= 31 && y.District_ID <= 54).ToList();
-            ViewBag.status = db.PROJECT_STATUS.OrderByDescending(x => x.ID).ToList();
-            ViewBag.sale = db.USER.OrderByDescending(x => x.ID).ToList();
+            ViewBag.District_ID = new SelectList(db.DISTRICT.Where(y => y.ID >= 31 && y.ID <= 54), "ID", "DistrictName");
+            ViewBag.Status_ID = new SelectList(db.PROJECT_STATUS, "ID", "Status_Name");
+            ViewBag.PropertyType_ID = new SelectList(db.PROPERTY_TYPE, "ID", "CodeType");
+            ViewBag.Street_ID = new SelectList(db.STREET.Where(y => y.ID >= 31 && y.ID <= 54), "ID", "StreetName");
+            ViewBag.UserID = new SelectList(db.USER, "ID", "Email");
+            ViewBag.Sale_ID = new SelectList(db.USER, "ID", "Email");
+            ViewBag.Ward_ID = new SelectList(db.WARD.Where(y => y.ID >= 31 && y.ID <= 54), "ID", "WardName");
+            ViewBag.Feature_ID = new SelectList(db.FEATURE, "ID", "FeatureName");
             return View();
         }
+
         [HttpPost]
-        public ActionResult CreateNewProperty(PROPERTY p)
+        public ActionResult CreateNewProperty(PROPERTY property)
         {
-            PROPERTY en = db.PROPERTY.FirstOrDefault(x => x.ID==p.ID);
-            
-            //PROPERTY en;
-           
+
+            property.Avatar = AvatarU(property);
+            property.Images = ImagesU(property);
+            property.Created_at = DateTime.Now;
+            property.Create_post = DateTime.Now;
+            property.UnitPrice = "VND";
+            property.Sale_ID = 1;
+            property.Status_ID = 1;
+            property.UserID = 1;
+
+            if (ModelState.IsValid)
+            {
+
+                db.PROPERTY.Add(property);
+                db.SaveChanges();
+                return Redirect("~/AgencyProperty/ListProperty");
+            }
+
+            ViewBag.District_ID = new SelectList(db.DISTRICT, "ID", "DistrictName", property.District_ID);
+            ViewBag.Status_ID = new SelectList(db.PROJECT_STATUS, "ID", "Status_Name", property.Status_ID);
+            ViewBag.PropertyType_ID = new SelectList(db.PROPERTY_TYPE, "ID", "CodeType", property.PropertyType_ID);
+            ViewBag.Street_ID = new SelectList(db.STREET, "ID", "StreetName", property.Street_ID);
+            ViewBag.UserID = new SelectList(db.USER, "ID", "Email", property.UserID);
+            ViewBag.Sale_ID = new SelectList(db.USER, "ID", "Email", property.Sale_ID);
+            ViewBag.Ward_ID = new SelectList(db.WARD, "ID", "WardName", property.Ward_ID);
+            return View(property);
+        }
 
 
-            return RedirectToAction("Index");
+        private string ImagesU(PROPERTY p)
+        {
+
+            string filename;
+            string extension;
+            string b;
+            string s = "";
+            foreach (var file in p.UpImages)
+            {
+                if (file.ContentLength > 0)
+                {
+                    filename = Path.GetFileNameWithoutExtension(file.FileName);
+                    extension = Path.GetExtension(file.FileName);
+                    filename = filename + DateTime.Now.ToString("yymmssff") + extension;
+                    p.Images = filename;
+                    b = p.Images;
+                    s = string.Concat(s, b, ",");
+                    filename = Path.Combine(Server.MapPath("~/Images"), filename);
+                    file.SaveAs(filename);
+
+                }
+
+            }
+            return s;
 
         }
-        public void AvatarU(ref string s,ref PROPERTY p)
+        private string AvatarU(PROPERTY p)
         {
-        
+            string s = "";
             string filename;
             string extension;
 
@@ -66,56 +115,15 @@ namespace PPC.Controllers
                 s = p.Avatar;
                 filename = Path.Combine(Server.MapPath("~/Images"), filename);
                 p.AvatarUpload.SaveAs(filename);
+                return s;
 
             }
-            else
-            {
-                //s = en.Avatar;
-
-            }
-        }
-        private void ImagesU(ref PROPERTY p, ref string s)
-        {
-           
-            string filename;
-            string extension;
-            string b;
-            s = "";
-
-            if (p.ImagesUpload == null)
-            {
-                s = p.Images;
-
-            }
-
-            else
-            {
-
-                foreach (var file in p.ImagesUpload)
-                {
-                    if (file.ContentLength > 0)
-                    {
-                        filename = Path.GetFileNameWithoutExtension(file.FileName);
-                        extension = Path.GetExtension(file.FileName);
-                        filename = filename + DateTime.Now.ToString("yymmssff") + extension;
-                        p.Images = filename;
-                        b = p.Images;
-                        s = string.Concat(s, b, ",");
-                        filename = Path.Combine(Server.MapPath("~/Images"), filename);
-                        file.SaveAs(filename);
-                    }
-                    else
-                    {
-                        s = p.Images;
-                    }
-
-                }
-
-
-
-            }
-
+            return s;
 
         }
+
+
+
+
     }
 }

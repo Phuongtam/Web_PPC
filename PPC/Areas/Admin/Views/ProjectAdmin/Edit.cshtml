@@ -26,26 +26,18 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Avatar, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Avatar, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <img src="~/Images/@Model.Avatar" width="150px" />
                 <input class="form-control" type="file" name="AvatarUpload" accept="image/*" />
+                @Html.ValidationMessageFor(model => model.Avatar)
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Images, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @{string[] chuoi = @Model.Images.Split(',');
-
-                }
-                @for (int i = 0; i < chuoi.Count() - 1; i++)
-                {
-                    <img src="~/Images/@chuoi[i]" width="100px" alt="@Model.Images" />
-                }
-                <div>
-                    <input type="file" name="ImagesUpload" accept="image/*" multiple />
-                </div>
+                <input class="form-control" type="file" name="UpImages" accept="image/*" multiple />
+                @Html.ValidationMessageFor(model => model.Images)
             </div>
         </div>
 

@@ -64,7 +64,7 @@
                         </div>
                         <div class="tkqs-city">
                             <label for="bqf-price-min" class="bqf-price-min-label"><b>Property Type</b></label>
-                            @Html.DropDownList("PropertyType_ID", new SelectList(db.PROPERTY_TYPE, "ID", "CodeType"), "All Type", new { @class = "form-control" })
+                            @Html.DropDownList("PropertyType_ID", new SelectList(db.PROPERTY_TYPE, "ID", "CodeType"), new { @class = "form-control" })
                         </div>
 
                         @using (Html.BeginForm())
@@ -75,12 +75,12 @@
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="tkqs-city">
                                 <label for="bqf-price-min" class="bqf-price-min-label"><b>District</b></label>
-                                @Html.DropDownList("PropertyType_ID", new SelectList(db.DISTRICT, "ID", "DistrictName"), "All District", new { @class = "form-control" })
+                                @Html.DropDownList("PropertyType_ID", new SelectList(db.DISTRICT, "ID", "DistrictName"), new { @class = "form-control" })
                             </div>
                                 <div class="tkqs-city">
                                     <label for="bqf-price-min" class="bqf-price-min-label"><b>Street</b></label>
 
-                                    @Html.DropDownList("Street_ID", new SelectList(db.STREET.Take(0), "ID", "StreetName"), "All Streets", new { @class = "form-control" })
+                                    @Html.DropDownList("Street_ID", new SelectList(db.STREET.Take(0), "ID", "StreetName"), new { @class = "form-control" })
                                 </div>
                                 <div class="tkqs-submit bqf-form-bottom">
                                     <div class="bqf-submit">
@@ -145,8 +145,10 @@
                     <div class="name">
                         <b><a href="~/Property/Detail/@item.ID">@item.PropertyName</a></b>
                     </div>
-
-                    <p>@item.Content.Substring(0, 85) ...</p>
+                    <p>@item.PROPERTY_TYPE.CodeType</p>
+                    <p>District : @item.DISTRICT.DistrictName</p>
+                    <p>Street : @item.STREET.StreetName</p>
+                    <p>@item.Content.Substring(0, 10) ...</p>
                     <br />
                     <p>
                         <b>&nbsp;<img src="~/Images/dollar-coin-money.png" /> &nbsp;&nbsp;@item.Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="~/Images/chart-area.png" /> &nbsp;&nbsp;@item.Area</b><br />

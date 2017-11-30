@@ -52,7 +52,7 @@ namespace PPC.Models
         public virtual USER USER1 { get; set; }
         public virtual WARD WARD { get; set; }
         public HttpPostedFileBase AvatarUpload { get; set; }
-        public IEnumerable<HttpPostedFileBase> ImagesUpload { get; set; }
+        public IEnumerable<HttpPostedFileBase> UpImages { get; set; }
 
     }
 }

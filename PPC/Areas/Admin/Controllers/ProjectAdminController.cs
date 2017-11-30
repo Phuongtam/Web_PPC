@@ -95,7 +95,7 @@ namespace PPC.Areas.Admin.Controllers
             string b;
             s = "";
 
-            if (p.ImagesUpload == null)
+            if (p.UpImages == null)
             {
                 s = en.Images;
 
@@ -104,7 +104,7 @@ namespace PPC.Areas.Admin.Controllers
             else
             {
 
-                foreach (var file in p.ImagesUpload)
+                foreach (var file in p.UpImages)
                 {
                     if (file.ContentLength > 0)
                     {

@@ -39,8 +39,8 @@ namespace PPC.Controllers
         {
 
             var product = db.PROPERTY.ToList().Where(x => (x.PropertyName.Contains(text)
-                 || x.Content.Contains(text) || x.Price.ToString().Contains(text))&&((x.District_ID== District_ID) && (x.Street_ID == Street_ID))|| (x.PropertyType_ID == PropertyType_ID));
-          
+                 || x.Content.Contains(text) || x.Price.ToString().Contains(text))&&(x.District_ID== District_ID) && (x.Street_ID == Street_ID)&& (x.PropertyType_ID == PropertyType_ID));
+                     
             return View(product);
         }
 
