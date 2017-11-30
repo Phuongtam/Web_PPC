@@ -33,40 +33,13 @@ namespace PPC.Controllers
         }
         //
         //
-        public void ListAll()
-        {
-            
-          
-            //type = new List<SelectListItem>();
-            //district = new List<SelectListItem>();
-            //var typee = db.PROPERTY_TYPE.ToList().OrderBy(x => x.CodeType);
-            //var distric1 = db.DISTRICT.ToList().OrderBy(x => x.DistrictName);
-            ////
-            //type.Add(new SelectListItem { Text="All",Value="all" });
-            //foreach (var item  in typee)
-            //{
-            //    type.Add(new SelectListItem { Text = item.CodeType, Value = item.CodeType });
-
-            //}
-            //ViewData["loai"] = type;
-            ////
-            //district.Add(new SelectListItem { Text = "All", Value = "all" });
-            //foreach (var item in distric1)
-            //{
-            //    district.Add(new SelectListItem { Text = item.DistrictName, Value = item.DistrictName });
-
-            //}
-            //ViewData["quan"] = district;
-        }
+       
         [HttpGet]
-        public ActionResult Search(string text)
+        public ActionResult Search(string text,int PropertyType_ID,int District_ID, int Street_ID)
         {
-          
-           var product = db.PROPERTY.ToList().Where(x => x.PropertyName.Contains(text)
-                || x.Content.Contains(text) || x.Price.ToString().Contains(text));
-            //var product = db.PROPERTY.ToList().Where(x => x.PropertyName.Contains(text)
-            //    && x.DISTRICT.DistrictName==quan || x.PROPERTY_TYPE.CodeType==loai);
-            ListAll();
+
+            var product = db.PROPERTY.ToList().Where(x => (x.PropertyName.Contains(text)
+                 || x.Content.Contains(text) || x.Price.ToString().Contains(text))&&((x.District_ID== District_ID) && (x.Street_ID == Street_ID))|| (x.PropertyType_ID == PropertyType_ID));
           
             return View(product);
         }

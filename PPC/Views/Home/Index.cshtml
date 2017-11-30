@@ -60,34 +60,44 @@
                     <form class="turnkey-quicksearch-form clearfix" role="search" action="@Url.Action("Search", "Home")" method="get">
 
                         <div class="tkqs-city">
-                            <label for="bqf-city-select" class="bqf-city-label">Property Name</label>
+                            <label for="bqf-city-select" class="bqf-city-label"><b>Property Name</b></label>
                             <input type="text" class="form-control" placeholder="Search" name="text" style="height:initial">
                         </div>
-                        @*<div class="tkqs-price-min">*@
-                            @using (Html.BeginForm())
+                        <div class="tkqs-city">
+                            <label for="bqf-price-min" class="bqf-price-min-label"><b>Property Type</b></label>
+                            @Html.DropDownList("PropertyType_ID", new SelectList(db.PROPERTY_TYPE, "ID", "CodeType"), "All Type", new { @class = "form-control" })
+                        </div>
+                        
+                         @using (Html.BeginForm())
                             {
                                 @Html.AntiForgeryToken()
 
 
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
+                                
                                 <div class="tkqs-city">
-                                    <label for="bqf-price-min" class="bqf-price-min-label">District</label>
-
-                                    @Html.DropDownList("Quan_ID", new SelectList(db.DISTRICT, "ID", "DistrictName"), "All Districts", new { @class = "form-control" })
-                                </div >
+                                    <label for="bqf-price-min" class="bqf-price-min-label"><b>District</b></label>
+                                    @Html.DropDownList("District_ID",new SelectList(db.DISTRICT, "ID", "DistrictName"),"All District", new { @class = "form-control" })
+                                </div>
                                 <div class="tkqs-city">
-                                    <label for="bqf-price-min" class="bqf-price-min-label">Street</label>
+                                    <label for="bqf-price-min" class="bqf-price-min-label"><b>Street</b></label>
 
                                     @Html.DropDownList("Street_ID", new SelectList(db.STREET.Take(0), "ID", "StreetName"), "All Streets", new { @class = "form-control" })
+                                </div>
+                                <div class="tkqs-submit bqf-form-bottom">
+                                    <div class="bqf-submit">
+                                        <input class="bqf-submit-button btn btn-alt" type="submit" value="Search Now">
+                                        @*<i class="icon icon-nav-search"></i>*@
+                                    </div>
+
                                 </div>
 
 
 
 
 
-
-                            }
+                         }
+                          
                             <!--Scripts-->
                             @section Scripts {
                                 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
@@ -95,23 +105,22 @@
                                 @Scripts.Render("~/bundles/jqueryval")
 
 
-                                <script>
-                                    $('#Quan_ID').select2();
-                                    $('#Quan_ID').on('change', function () {
+                                <script class="active">
+                                    $('#District_ID').select2();
+                                    $('#District_ID').on('change', function () {
                                         $('#Street_ID').empty();
-                                        $.getJSON('GetStreet?District_id=' + $('#Quan_ID').val(), function (json) { $('#Street_ID').select2({ data: json }); });
+                                        $.getJSON('GetStreet?District_id=' + $('#District_ID').val(), function (json) { $('#Street_ID').select2({ data: json }); });
                                     });
+                                   
+                                    
+                                </script>
+                                <script>
+                                    $('#PropertyType_ID').select2();
                                 </script>
                                
                             }
                         
-                        <div class="tkqs-submit bqf-form-bottom">
-                            <div class="bqf-submit">
-                                <input class="bqf-submit-button btn btn-alt" type="submit" value="Search Now">
-                                <i class="icon icon-nav-search"></i>
-                            </div>
-
-                        </div><!-- .bqf-form-bottom -->
+                       <!-- .bqf-form-bottom -->
                     </form>
                 </div>
             </section>

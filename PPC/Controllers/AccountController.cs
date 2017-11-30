@@ -68,22 +68,25 @@ namespace PPC.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel model)
+        public ActionResult Login(string Email, string Password)
         {
-            var user = db.USER.Single(x => x.Email == model.Email && x.Password == model.Password);
-            if (!ModelState.IsValid)
+            var user = db.USER.Where(x => x.Email == Email).FirstOrDefault();
+            if (user != null)
             {
-                Session["UserID"] = user.ID.ToString();
-                Session["FullName"] = user.FullName.ToString(); ;
-                //return View(model);
-                return RedirectToAction("Index");
+                if (user.Password.Equals(Password))
+                {
+                    Session["Fullname"] = user.FullName;
+                    Session["userID"] = user.ID;
+                    return RedirectToAction("ListProperty", "AgencyProperty");
+                }
             }
             else
             {
-                ModelState.AddModelError("","Email or Password is wrong .");
+                //ViewBag.mess = "Account is not Exist";
+                ModelState.AddModelError("", "Email or Password is wrong .");
             }
             return View();
-
+            
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             //var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
@@ -100,6 +103,19 @@ namespace PPC.Controllers
             //        ModelState.AddModelError("", "Invalid login attempt.");
             //        return View(model);
             //}
+        }
+        public ActionResult Logout(int userID)
+        {
+           // int id = Int32.Parse(user_id);
+            var user = db.USER.FirstOrDefault(x => x.ID == userID);
+            if (user != null)
+            {
+                Session["Fullname"] = null;
+                Session["userID"] = null;
+
+            }
+            // return RedirectToAction("Login");
+            return View("Lockout");
         }
 
         //

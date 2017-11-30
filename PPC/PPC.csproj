@@ -173,6 +173,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ProjectAdminController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AgencyPropertyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PropertyController.cs" />
@@ -349,6 +350,9 @@
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Property\Detail.cshtml" />
+    <Content Include="Views\Shared\_AgencyLayout.cshtml" />
+    <Content Include="Views\AgencyProperty\ListProperty.cshtml" />
+    <Content Include="Views\AgencyProperty\CreateNewProperty.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
