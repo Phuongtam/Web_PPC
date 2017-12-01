@@ -108,7 +108,7 @@
                                     $('#District_ID').select2();
                                     $('#District_ID').on('change', function () {
                                         $('#Street_ID').empty();
-                                        $.getJSON('GetStreet?District_id=' + $('#District_ID').val(), function (json) { $('#Street_ID').select2({ data: json }); });
+                                        $.getJSON('/Home/GetStreet?District_id=' + $('#District_ID').val(), function (json) { $('#Street_ID').select2({ data: json }); });
                                     });
                                    
 

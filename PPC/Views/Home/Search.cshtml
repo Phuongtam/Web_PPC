@@ -75,7 +75,7 @@
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="tkqs-city">
                                 <label for="bqf-price-min" class="bqf-price-min-label"><b>District</b></label>
-                                @Html.DropDownList("PropertyType_ID", new SelectList(db.DISTRICT, "ID", "DistrictName"), new { @class = "form-control" })
+                                @Html.DropDownList("District_ID", new SelectList(db.DISTRICT, "ID", "DistrictName"), new { @class = "form-control" })
                             </div>
                                 <div class="tkqs-city">
                                     <label for="bqf-price-min" class="bqf-price-min-label"><b>Street</b></label>
@@ -104,10 +104,10 @@
 
 
                             <script class="active">
-                                    $('#Quan_ID').select2();
-                                    $('#Quan_ID').on('change', function () {
+                                $('#District_ID').select2();
+                                $('#District_ID').on('change', function () {
                                         $('#Street_ID').empty();
-                                        $.getJSON('GetStreet?District_id=' + $('#Quan_ID').val(), function (json) { $('#Street_ID').select2({ data: json }); });
+                                        $.getJSON('GetStreet?District_id=' + $('#District_ID').val(), function (json) { $('#Street_ID').select2({ data: json }); });
                                     });
 
 
